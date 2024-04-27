@@ -125,6 +125,8 @@ const WeatherApp = () => {
                         <div className="text">Humidity</div>
                     </div>
                 </div>
+                <div className="button" onClick={()=>{}}>Прогноз на 7 дней</div>
+
                 <div className="element">
                     <img src={wind_icon} alt="" className="icon" />
                     <div className="data">
