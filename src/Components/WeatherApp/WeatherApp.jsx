@@ -1,6 +1,8 @@
 import React from "react";
 import './WeatherApp.css'
 import {useState} from 'react'
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 import search_icon from '../Assets/search.png';
@@ -44,6 +46,13 @@ const WeatherApp = () => {
         const wind = document.getElementsByClassName("wind-rate");
         const temperature = document.getElementsByClassName("weather-temp");
         const location = document.getElementsByClassName("weather-location");
+        const ERROR = document.getElementsByClassName("cod");
+
+        if (response.status === 404) {
+            // Отображаем сообщение о том, что город не найден
+            console.log('Город не найден');
+            return;
+          }
 
         humidity[0].innerHTML = data.main.humidity+" %";
         wind[0].innerHTML = Math.floor(data.wind.speed)+ " km/h";
