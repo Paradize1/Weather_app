@@ -87,7 +87,18 @@ const WeatherApp = () => {
     return (
         <div className="container">
             <div className="top-bar">
-                <input type="text" className="cityInput" placeholder="Search"></input>
+
+            <input
+            type="text"
+            className="cityInput"
+            placeholder="Search"
+            onKeyDown={(event) => {
+                if (event.key === 'Enter') {
+                search(event);
+                }
+            }}
+            />
+
                 <div className="search-icon" onClick={()=>{search()}}>
                     <img src={search_icon} alt="" />
                 </div>
