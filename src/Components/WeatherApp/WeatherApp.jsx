@@ -4,7 +4,6 @@ import {useState} from 'react'
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-
 import search_icon from '../Assets/search.png';
 import clear_icon from '../Assets/clear.png';
 import cloud_icon from '../Assets/cloud.png';
@@ -30,8 +29,15 @@ const WeatherApp = () => {
     let api_key = "a8bc95b3bb0f5d240c2b5eb24a52f160";
 
     const[wicon,setWicon] = useState(cloud_icon);
+    const [showButton, setShowButton] = useState(false);
+
+    const [forecast, setForecast] = useState([]);
+    const [showForecast, setShowForecast] = useState(false);
+    const [isForecastShown, setIsForecastShown] = useState(false);
+
 
     const search = async () =>{
+        setShowButton(true);
         const element = document.getElementsByClassName("cityInput")
         if(element[0].value==="")
         {
@@ -46,7 +52,7 @@ const WeatherApp = () => {
         const wind = document.getElementsByClassName("wind-rate");
         const temperature = document.getElementsByClassName("weather-temp");
         const location = document.getElementsByClassName("weather-location");
-        const ERROR = document.getElementsByClassName("cod");
+        
 
         if (response.status === 404) {
             // Отображаем сообщение о том, что город не найден
@@ -87,11 +93,29 @@ const WeatherApp = () => {
         {
             setWicon(clear_icon);
         }
-
-
-
-
     }
+
+    const fetchForecast = async () => {
+        const city = document.getElementsByClassName("cityInput")[0].value;
+        if (!city) return;
+        const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=Metric&appid=a8bc95b3bb0f5d240c2b5eb24a52f160`;
+        const response = await fetch(forecastUrl);
+        const data = await response.json();
+        if (data.cod === "200") {
+            setForecast(data.list);
+            setShowForecast(true);
+        } else {
+            console.log('Проблема с получением данных прогноза');
+        }
+    };
+
+    const toggleForecast = async () => {
+        if (!isForecastShown) {
+            await fetchForecast();  // Загрузка данных, если они еще не загружены
+        }
+        setIsForecastShown(!isForecastShown);  // Переключение состояния отображения
+    };
+    
 
     return (
         <div className="container">
@@ -125,7 +149,8 @@ const WeatherApp = () => {
                         <div className="text">Humidity</div>
                     </div>
                 </div>
-                <div className="button" onClick={()=>{}}>Прогноз на 7 дней</div>
+
+                {showButton && <div className="button" onClick ={toggleForecast}>{isForecastShown ? "Спрятать" : "Подробнее"}</div>}
 
                 <div className="element">
                     <img src={wind_icon} alt="" className="icon" />
@@ -135,6 +160,17 @@ const WeatherApp = () => {
                     </div>
                 </div>
             </div>
+            {isForecastShown && (
+                <div className="forecast-container">
+                    {forecast.map((item, index) => (
+                        <div key={index} className="forecast-item">
+                            <div>{new Date(item.dt * 1000).toLocaleDateString()}</div>
+                            <div>{item.main.temp.toFixed(1)}°C</div>
+                            <div>{item.weather[0].description}</div>
+                        </div>
+                    ))}
+                </div>
+            )}
         </div>
     )
 }
