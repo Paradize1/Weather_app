@@ -1,10 +1,14 @@
-.container{
+.container {
     width: 607px;
-    height: 829px;
+    /* height: 829px; */  /* Уберите фиксированную высоту */
+    min-height: 829px;  /* Минимальная высота может быть задана, чтобы контейнер не был слишком маленьким */
     margin: auto;
     margin-top: 75px;
     border-radius: 12px;
     background-image: linear-gradient(180deg, #130754 0%, #3b2f80 100%);
+    /* Добавьте эти свойства, если нужно, чтобы контент корректно прокручивался внутри контейнера */
+    overflow: auto;  /* Позволит скроллировать контент внутри контейнера */
+    padding-bottom: 20px; /* Добавьте немного отступа снизу */
 }
 
 .top-bar{
@@ -84,6 +88,18 @@
     padding: 8px 16px;
     font-size: 1rem;
     cursor: pointer;
+
+    transition: background-color 0.3s ease, transform 0.3s ease; /* добавляем плавный переход для фона и трансформации */
+
+}
+
+.button:hover, .button:focus {
+    background-color: #3658a7; /* изменяем цвет при наведении */
+    transform: scale(1.05); /* немного увеличиваем кнопку */
+}
+
+.button:active {
+    transform: scale(0.95); /* уменьшаем кнопку при нажатии */
 }
 
 .element{
@@ -104,3 +120,38 @@
 .icon{
     margin-top: 10px;
 }
+
+.forecast-container {
+    margin-top: 20px; /* Добавьте отступ сверху для разделения элементов */
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* Количество колонок зависит от количества дней в прогнозе */
+    grid-gap: 10px; /* Расстояние между колонками и рядами */
+    color: #FFF; /* Цвет текста */
+    text-align: center; /* Центрирование текста */
+}
+
+
+.forecast-row {
+    display: flex; /* Используйте flex для управления расположением элементов в ряду */
+    flex-direction: column; /* Организация элементов по вертикали */
+    align-items: center; /* Центрирование элементов внутри колонки */
+    margin-bottom: 10px; /* Отступ между рядами */
+}
+
+.forecast-header {
+    font-size: 20px; /* Размер шрифта для заголовков */
+    font-weight: bold; /* Жирное начертание для заголовков */
+    padding: 10px 0; /* Отступы сверху и снизу для заголовков */
+    background-color: rgba(255, 255, 255, 0.1); /* Полупрозрачный фон для заголовков */
+    width: 100%; /* Ширина заголовков */
+    border-radius: 10px; /* Скругление углов заголовков */
+}
+
+.forecast-cell {
+    font-size: 16px; /* Размер шрифта для ячеек */
+    padding: 20px 0; /* Отступы сверху и снизу для ячеек */
+    border-radius:50px; /* Скругление углов ячеек */
+    background-color: rgba(255, 255, 255, 0.1); /* Полупрозрачный фон для ячеек */
+    width: 100%; /* Ширина ячеек */
+}
+
