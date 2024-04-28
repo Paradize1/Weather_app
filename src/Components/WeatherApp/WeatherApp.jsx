@@ -164,42 +164,42 @@ const WeatherApp = () => {
                     </div>
                 </div>
             </div>
-            {isForecastShown && (
-                <div className="forecast-container" >
-                    <div className="forecast-row">
-                        <div className="forecast-header">Дата</div>
-                        {forecast.map((item, index) => (
-                            <div key={index} className="forecast-cell">
-                                {new Date(item.dt * 1000).toLocaleDateString()}
-                            </div>
-                        ))}
-                    </div>
-                    <div className="forecast-row">
-                        <div className="forecast-header">Температура</div>
-                        {forecast.map((item, index) => (
-                            <div key={index} className="forecast-cell">
-                                {item.main.temp.toFixed(1)}°C
-                            </div>
-                        ))}
-                    </div>
-                    <div className="forecast-row">
-                        <div className="forecast-header">Влажность</div>
-                        {forecast.map((item, index) => (
-                            <div key={index} className="forecast-cell">
-                                {item.main.humidity}%
-                            </div>
-                        ))}
-                    </div>
-                    <div className="forecast-row">
-                        <div className="forecast-header">Ветер</div>
-                        {forecast.map((item, index) => (
-                            <div key={index} className="forecast-cell">
-                                {item.wind.speed.toFixed(1)} km/h
-                            </div>
-                        ))}
-                    </div>
+
+            <div className={`forecast-container ${isForecastShown ? 'show' : ''}`}>
+
+                <div className="forecast-row">
+                    <div className="forecast-header">Дата</div>
+                    {forecast.map((item, index) => (
+                        <div key={index} className="forecast-cell">
+                            {new Date(item.dt * 1000).toLocaleDateString()}
+                        </div>
+                    ))}
+                </div>
+                <div className="forecast-row">
+                    <div className="forecast-header">Температура</div>
+                    {forecast.map((item, index) => (
+                        <div key={index} className="forecast-cell">
+                            {item.main.temp.toFixed(1)}°C
+                        </div>
+                    ))}
+                </div>
+                <div className="forecast-row">
+                    <div className="forecast-header">Влажность</div>
+                    {forecast.map((item, index) => (
+                        <div key={index} className="forecast-cell">
+                            {item.main.humidity}%
+                        </div>
+                    ))}
+                </div>
+                <div className="forecast-row">
+                    <div className="forecast-header">Ветер</div>
+                    {forecast.map((item, index) => (
+                        <div key={index} className="forecast-cell">
+                            {item.wind.speed.toFixed(1)} km/h
+                        </div>
+                    ))}
+                </div>
             </div>
-            )}
         </div>
     )
 }

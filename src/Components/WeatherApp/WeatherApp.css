@@ -122,14 +122,23 @@
 }
 
 .forecast-container {
-    margin-top: 20px; /* Добавьте отступ сверху для разделения элементов */
+    margin-top: 20px;
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* Количество колонок зависит от количества дней в прогнозе */
-    grid-gap: 10px; /* Расстояние между колонками и рядами */
-    color: #FFF; /* Цвет текста */
-    text-align: center; /* Центрирование текста */
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 10px;
+    color: #FFF;
+    text-align: center;
+    transition: opacity 0.5s ease, max-height 0.5s ease-in-out, visibility 0.5s ease-in-out;
+    opacity: 0; /* начальная прозрачность */
+    max-height: 0; /* контейнер полностью свёрнут */
+    visibility: hidden; /* контейнер не виден */
+    overflow: hidden; /* содержимое контейнера скрыто */
 }
-
+.forecast-container.show {
+    opacity: 1;
+    max-height: 1000px; /* предполагаемая максимальная высота, достаточная для всего содержимого */
+    visibility: visible; /* контейнер теперь виден */
+}
 
 .forecast-row {
     display: flex; /* Используйте flex для управления расположением элементов в ряду */
