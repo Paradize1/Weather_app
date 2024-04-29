@@ -14,15 +14,6 @@ import wind_icon from '../Assets/wind.png';
 import humidity_icon from '../Assets/humidity.png';
 
 
-
-
-
-
-
-
-
-
-
 const WeatherApp = () => {
 
 
