@@ -14,6 +14,9 @@ import wind_icon from '../Assets/wind.png';
 import humidity_icon from '../Assets/humidity.png';
 
 
+const isMobile = window.matchMedia("(max-width: 768px)").matches;
+
+
 const WeatherApp = () => {
 
 
